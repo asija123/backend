@@ -10,7 +10,15 @@ const app = express();
 //   console.log(`App is running on port ${process.env.PORT}`);
 // });
 
-connectDB();
+connectDB()
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(`App is running on port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("Mongo DB connection failed !!!", err);
+  });
 
 // another way is written int he db folder in index.js
 // ************this is the one way to connect to the db*************
